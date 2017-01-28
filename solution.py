@@ -158,9 +158,6 @@ def solve(grid):
   """
   puzzle = grid_values(grid)
   puzzle = search(puzzle)
-  for box, value in puzzle.items():
-    assign_value(puzzle, box, value)
-  assert(len(assignments) == 81)
   return puzzle
 
 if __name__ == '__main__':
