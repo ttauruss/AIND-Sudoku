@@ -80,9 +80,9 @@ def display(values):
 
 def eliminate(values):
   """
-  Applies eliminate strategy to values.
+  Eliminate values found in other boxes in the same unit.
   Args:
-        values(dict): The sudoku in dictionary form
+      values(dict): The sudoku in dictionary form
   Returns:
       the values dictionary after eliminate strategy applied.
   """
@@ -100,9 +100,9 @@ def only_choice(values):
   """
   Applies only choice strategy to values.
   Args:
-        values(dict): The sudoku in dictionary form
+      values(dict): The sudoku in dictionary form
   Returns:
-        the values dictionary after only choice strategy applied.
+      the values dictionary after only choice strategy applied.
   """
   for unit in unitlist:
     digits  ='123456789'
