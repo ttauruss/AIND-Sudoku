@@ -89,25 +89,11 @@ def eliminate(values):
   newvalues = { k: v for k, v in values.items() }
   for b in boxes:
     if len(values[b]) == 1:
-      ridx = ord(b[0]) - ord('A')
-      cidx = ord(b[1]) - ord('1')
-      for r in row_units[ridx]:
-        if b != r:
-          newvalues[r] = newvalues[r].replace(values[b], '')
-      for c in column_units[cidx]:
-        if b != c:
-          newvalues[c] = newvalues[c].replace(values[b], '')
-      for s in square_units[(ridx // 3) * 3 + cidx // 3]:
-        if b != s:
-          newvalues[s] = newvalues[s].replace(values[b], '')
-      if b in diag_units[0]:
-        for d in diag_units[0]:
-          if b != d:
-            newvalues[d] = newvalues[d].replace(values[b], '')
-      if b in diag_units[1]:
-        for d in diag_units[1]:
-          if b != d:
-            newvalues[d] = newvalues[d].replace(values[b], '')
+      for unit in unitlist:
+        if b in unit:
+          for peer in unit:
+            if b != peer:
+              newvalues[peer] = newvalues[peer].replace(values[b], '')
   return newvalues
 
 def only_choice(values):
