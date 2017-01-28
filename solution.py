@@ -117,7 +117,8 @@ def only_choice(values):
 
 def reduce_puzzle(values):
   """
-  Applied all strategies untill stalled.
+  Constraint propagation step.
+  Applies all strategies until stalled.
   Args:
         values(dict): The sudoku in dictionary form
   Returns:
@@ -138,7 +139,7 @@ def reduce_puzzle(values):
 
 def search(values):
   """
-  Recursive search for a solution by trying multiple values.
+  Applies search strategy recursively after constraint propagation step.
   Args:
         values(dict): The sudoku in dictionary form
   Returns:
