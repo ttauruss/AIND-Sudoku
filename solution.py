@@ -123,6 +123,7 @@ def reduce_puzzle(values):
     solved_before = len([b for b in values.keys() if len(values[b]) == 1])
     values = eliminate(values)
     values = only_choice(values)
+    values = naked_twins(values)
     solved_after = len([b for b in values.keys() if len(values[b]) == 1])
     stalled = solved_before == solved_after
     if len([b for b in values.keys() if len(values[b]) == 0]):
@@ -164,7 +165,6 @@ def solve(grid):
 
 if __name__ == '__main__':
   diag_sudoku_grid = '2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3'
-  # diag_sudoku_grid = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
   display(solve(diag_sudoku_grid))
 
   try:

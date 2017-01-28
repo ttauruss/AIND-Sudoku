@@ -3,11 +3,11 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: Naked twins is another strategy that can be used in constraint propagation step of sudoku solver algorithm.
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: In addition to 27 units of regular sudoku we have 2 more diagonal units which also checked at constraint propagation step.
 
 ### Install
 
