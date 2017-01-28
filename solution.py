@@ -5,6 +5,7 @@ def cross(a, b):
   return [s + t for s in a for t in b]
 
 def crosslist(l1, l2):
+  "Cross product of two lists"
   return [ (e1, e2) for e1 in l1 for e2 in l2 ]
 
 digits = '123456789'
@@ -19,7 +20,6 @@ unitlist = row_units + column_units + square_units + diag_units
 
 def assign_value(values, box, value):
   """
-  Please use this function to update your values dictionary!
   Assigns a value to a given box. If it updates the board record it.
   """
   values[box] = value
@@ -28,7 +28,8 @@ def assign_value(values, box, value):
   return values
 
 def naked_twins(values):
-  """Eliminate values using the naked twins strategy.
+  """
+  Eliminate values using the naked twins strategy.
   Args:
       values(dict): a dictionary of the form {'box_name': '123456789', ...}
 
@@ -78,6 +79,13 @@ def display(values):
   return
 
 def eliminate(values):
+  """
+  Applies eliminate strategy to values.
+  Args:
+        values(dict): The sudoku in dictionary form
+  Returns:
+      the values dictionary after eliminate strategy applied.
+  """
   newvalues = { k: v for k, v in values.items() }
   for b in boxes:
     if len(values[b]) == 1:
@@ -102,22 +110,34 @@ def eliminate(values):
             newvalues[d] = newvalues[d].replace(values[b], '')
   return newvalues
 
-def check_unit(values, unit):
-  digits  ='123456789'
-  d = { k : [] for k in digits } # dictionary from digit (1-9) to box
-  for b in unit:
-    for c in values[b]:
-      d[c].append(b)
-  for k, v in d.items():
-    if len(v) == 1:
-      values[v[0]] = k
-
 def only_choice(values):
-  for u in unitlist:
-    check_unit(values, u)
+  """
+  Applies only choice strategy to values.
+  Args:
+        values(dict): The sudoku in dictionary form
+  Returns:
+        the values dictionary after only choice strategy applied.
+  """
+  for unit in unitlist:
+    digits  ='123456789'
+    d = { k : [] for k in digits } # dictionary from digit (1-9) to box
+    for b in unit:
+      for c in values[b]:
+        d[c].append(b)
+    for k, v in d.items():
+      if len(v) == 1:
+        values[v[0]] = k
   return values
 
 def reduce_puzzle(values):
+  """
+  Applied all strategies untill stalled.
+  Args:
+        values(dict): The sudoku in dictionary form
+  Returns:
+        the values dictionary when no more strategies can be applied.
+        False if sudoku cannot be solved.
+  """
   stalled = False
   while not stalled:
     solved_before = len([b for b in values.keys() if len(values[b]) == 1])
@@ -130,14 +150,19 @@ def reduce_puzzle(values):
       return False
   return values
 
-def solved(values):
-  return len([b for b in values.keys() if len(values[b]) == 1]) == 81
-
 def search(values):
+  """
+  Recursive search for a solution by trying multiple values.
+  Args:
+        values(dict): The sudoku in dictionary form
+  Returns:
+        the values dictionary if sudoku is solved.
+        False if sudoku cannot be solved.
+  """
   values = reduce_puzzle(values)
   if values == False:
     return False
-  if solved(values):
+  if len([b for b in values.keys() if len(values[b]) == 1]) == 81:
     return values
   minlen, b = min((len(values[b]), b) for b in values.keys() if len(values[b]) > 1)
   for d in values[b]:
