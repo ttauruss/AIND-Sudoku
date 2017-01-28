@@ -7,7 +7,7 @@ A: Naked twins is another strategy that can be used in constraint propagation st
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: In addition to 27 units of regular sudoku we have 2 more diagonal units which also checked at constraint propagation step.
+A: In addition to 27 units of regular sudoku we have 2 more diagonal units which are also checked at constraint propagation step.
 
 ### Install
 
